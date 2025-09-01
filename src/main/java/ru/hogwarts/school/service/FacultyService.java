@@ -20,10 +20,11 @@ public class FacultyService {
         return faculty;
     }
 
-    public Faculty editFaculty(Faculty faculty) {
-        if (facultyMap.containsKey(faculty.getId())) {
-            facultyMap.put(faculty.getId(), faculty);
-        }
+    public Faculty editFaculty(Long id, Faculty faculty) {
+        if (!facultyMap.containsKey(id)) {
+            return null;
+        } facultyMap.put(id, faculty);
+        faculty.setId(id);
         return faculty;
     }
 

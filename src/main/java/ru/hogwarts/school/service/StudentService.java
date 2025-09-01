@@ -16,10 +16,12 @@ public class StudentService {
         return student;
     }
 
-    public Student editStudent(Student student) {
-        if (studentMap.containsKey(student.getId())) {
-            studentMap.put(student.getId(), student);
+    public Student editStudent(long id, Student student) {
+        if (!studentMap.containsKey(id)) {
+            return null;
         }
+        studentMap.put(id, student);
+        student.setId(id);
         return student;
     }
 
