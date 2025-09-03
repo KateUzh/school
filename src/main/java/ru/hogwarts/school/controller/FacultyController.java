@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 @RestController
-@RequestMapping ("/faculty")
+@RequestMapping("/faculty")
 public class FacultyController {
     private final FacultyService facultyService;
 
@@ -19,7 +19,7 @@ public class FacultyController {
         this.facultyService = facultyService;
     }
 
-    @GetMapping ("{id}")
+    @GetMapping("{id}")
     public ResponseEntity<Faculty> getFaculty(@RequestParam Long id) {
         Faculty faculty = facultyService.findFaculty(id);
         if (faculty == null) {
@@ -33,9 +33,9 @@ public class FacultyController {
         return facultyService.addFaculty(faculty);
     }
 
-    @PutMapping("{id}")
-    public ResponseEntity<Faculty> editFaculty(@PathVariable Long id, @RequestBody Faculty faculty) {
-        Faculty foundFaculty = facultyService.editFaculty(id, faculty);
+    @PutMapping
+    public ResponseEntity<Faculty> editFaculty(@RequestBody Faculty faculty) {
+        Faculty foundFaculty = facultyService.editFaculty(faculty);
         if (foundFaculty == null) {
             ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
@@ -50,7 +50,7 @@ public class FacultyController {
 
     @GetMapping
     public ResponseEntity<Collection<Faculty>> getStudentsCertainColor(@RequestParam String color) {
-        if (color!=null && !color.isBlank()) {
+        if (color != null && !color.isBlank()) {
             return ResponseEntity.ok(facultyService.findFacultyByColor(color));
         }
         return ResponseEntity.ok(Collections.emptyList());
