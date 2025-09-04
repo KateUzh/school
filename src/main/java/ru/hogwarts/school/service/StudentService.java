@@ -1,6 +1,8 @@
 package ru.hogwarts.school.service;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.StudentRepository;
 
@@ -19,6 +21,9 @@ public class StudentService {
     }
 
     public Student editStudent(Student student) {
+        if(!studentRepository.existsById(student.getId())){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Студент не найден");
+        }
         return studentRepository.save(student);
     }
 
@@ -27,6 +32,9 @@ public class StudentService {
     }
 
     public Student findStudent(long id) {
+        if(!studentRepository.existsById(id)){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Студент не найден");
+        }
         return studentRepository.findById(id).get();
     }
 
