@@ -33,10 +33,8 @@ public class FacultyService {
     }
 
     public Faculty findFaculty(long id) {
-        if(!facultyRepository.existsById(id)){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Факультет не найден");
-        }
-        return facultyRepository.findById(id).get();
+        return facultyRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                "Факультет не найден"));
     }
 
     public void deleteFaculty(long id) {

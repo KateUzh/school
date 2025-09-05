@@ -37,9 +37,6 @@ public class StudentController {
     @PutMapping
     public ResponseEntity<Student> editStudent(@RequestBody Student student) {
         Student foundStudent = studentService.editStudent(student);
-        if (foundStudent == null) {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
         return ResponseEntity.ok(foundStudent);
     }
 

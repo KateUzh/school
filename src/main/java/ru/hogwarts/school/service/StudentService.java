@@ -32,10 +32,8 @@ public class StudentService {
     }
 
     public Student findStudent(long id) {
-        if(!studentRepository.existsById(id)){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Студент не найден");
-        }
-        return studentRepository.findById(id).get();
+        return studentRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                "Студент не найден"));
     }
 
     public void deleteStudent(long id) {
