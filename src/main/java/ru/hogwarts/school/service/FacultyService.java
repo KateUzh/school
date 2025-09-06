@@ -22,8 +22,8 @@ public class FacultyService {
     }
 
     public Faculty editFaculty(Faculty faculty) {
-        if(!facultyRepository.existsById(faculty.getId())) {
-           throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Факультет не найден");
+        if (!facultyRepository.existsById(faculty.getId())) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Факультет не найден");
         }
         return facultyRepository.save(faculty);
     }
@@ -33,7 +33,7 @@ public class FacultyService {
     }
 
     public Faculty findFaculty(long id) {
-        return facultyRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,
+        return facultyRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                 "Факультет не найден"));
     }
 
@@ -43,5 +43,9 @@ public class FacultyService {
 
     public Collection<Faculty> findFacultyByColor(String color) {
         return facultyRepository.findByColor(color);
+    }
+
+    public Collection<Faculty> findFacultyByNameOrColor(String name, String color) {
+        return facultyRepository.findByNameIgnoreCaseOrColorIgnoreCase(name, color);
     }
 }
