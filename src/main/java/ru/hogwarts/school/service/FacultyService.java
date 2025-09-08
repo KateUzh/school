@@ -1,6 +1,5 @@
 package ru.hogwarts.school.service;
 
-import org.hibernate.annotations.NotFound;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -8,6 +7,7 @@ import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.repository.FacultyRepository;
 
 import java.util.Collection;
+import java.util.Collections;
 
 @Service
 public class FacultyService {
@@ -45,7 +45,10 @@ public class FacultyService {
         return facultyRepository.findByColor(color);
     }
 
-    public Collection<Faculty> findFacultyByNameOrColor(String name, String color) {
-        return facultyRepository.findByNameIgnoreCaseOrColorIgnoreCase(name, color);
+    public Collection<Faculty> findFacultyByNameOrColor(String nameOrColor) {
+        if(!facultyRepository.findByColorIgnoreCase(nameOrColor).isEmpty()){
+            return facultyRepository.findByColorIgnoreCase(nameOrColor);
+        }
+        return facultyRepository.findByNameIgnoreCase(nameOrColor);
     }
 }
