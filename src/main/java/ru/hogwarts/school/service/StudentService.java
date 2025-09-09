@@ -21,7 +21,7 @@ public class StudentService {
     }
 
     public Student editStudent(Student student) {
-        if(!studentRepository.existsById(student.getId())){
+        if (!studentRepository.existsById(student.getId())) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Студент не найден");
         }
         return studentRepository.save(student);
@@ -32,7 +32,7 @@ public class StudentService {
     }
 
     public Student findStudent(long id) {
-        return studentRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,
+        return studentRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                 "Студент не найден"));
     }
 
@@ -40,7 +40,11 @@ public class StudentService {
         studentRepository.deleteById(id);
     }
 
-    public Collection<Student> findStudentByAge(int age) {
+    public Collection<Student> findStudentsByAge(int age) {
         return studentRepository.findByAge(age);
+    }
+
+    public Collection<Student> findStudentsByAgeBetween(int minAge, int maxAge) {
+        return studentRepository.findByAgeBetween(minAge, maxAge);
     }
 }
