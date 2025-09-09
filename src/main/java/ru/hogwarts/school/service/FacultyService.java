@@ -46,9 +46,6 @@ public class FacultyService {
     }
 
     public Collection<Faculty> findFacultyByNameOrColor(String nameOrColor) {
-        if(!facultyRepository.findByColorIgnoreCase(nameOrColor).isEmpty()){
-            return facultyRepository.findByColorIgnoreCase(nameOrColor);
-        }
-        return facultyRepository.findByNameIgnoreCase(nameOrColor);
+        return facultyRepository.findByNameIgnoreCaseOrColorIgnoreCase(nameOrColor, nameOrColor);
     }
 }
