@@ -21,10 +21,11 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
-    public Student editStudent(Student student) {
-        if (!studentRepository.existsById(student.getId())) {
+    public Student editStudent(Long id, Student student) {
+        if (!studentRepository.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Студент не найден");
         }
+        student.setId(id);
         return studentRepository.save(student);
     }
 
