@@ -21,10 +21,11 @@ public class FacultyService {
         return facultyRepository.save(faculty);
     }
 
-    public Faculty editFaculty(Faculty faculty) {
-        if (!facultyRepository.existsById(faculty.getId())) {
+    public Faculty editFaculty(Long id, Faculty faculty) {
+        if (!facultyRepository.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Факультет не найден");
         }
+        faculty.setId(id);
         return facultyRepository.save(faculty);
     }
 
