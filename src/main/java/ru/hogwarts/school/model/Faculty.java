@@ -21,11 +21,9 @@ public class Faculty {
     public Faculty() {
     }
 
-    public Faculty(long id, String name, String color, Collection<Student> students) {
-        this.id = id;
+    public Faculty(String name, String color) {
         this.name = name;
         this.color = color;
-        this.students = students;
     }
 
     public Long getId() {
