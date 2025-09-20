@@ -1,7 +1,6 @@
 package ru.hogwarts.school.controller;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -39,7 +38,6 @@ public class StudentControllerSpringBootTest {
     }
 
     @Test
-    @DisplayName("C - создание студента")
     public void createStudentTest() throws Exception {
         Student request = new Student("Kate", 30);
 
@@ -55,8 +53,7 @@ public class StudentControllerSpringBootTest {
     }
 
     @Test
-    @DisplayName("R - получение студента")
-    public void readStudentTest() throws Exception{
+    public void readStudentTest() throws Exception {
         ResponseEntity<Student> studentResponseEntity = restTemplate
                 .getForEntity("http://localhost:" + port + "/student/" + student.getId(), Student.class);
         Student responseBody = studentResponseEntity.getBody();
@@ -69,8 +66,7 @@ public class StudentControllerSpringBootTest {
     }
 
     @Test
-    @DisplayName("D - удаление студента")
-    public void deleteStudentTest() throws Exception{
+    public void deleteStudentTest() throws Exception {
         ResponseEntity<Student> studentResponseEntity = restTemplate
                 .exchange("http://localhost:" + port + "/student/" + student.getId(),
                         HttpMethod.DELETE, null, Student.class);
@@ -80,10 +76,10 @@ public class StudentControllerSpringBootTest {
     }
 
     @Test
-    @DisplayName("U - обновление студента")
-    public void updateStudentTest() throws Exception{
+    public void updateStudentTest() throws Exception {
         Student updateStudentRequest = new Student("Katherin", student.getAge());
         HttpEntity<Student> entity = new HttpEntity<>(updateStudentRequest);
+
         ResponseEntity<Student> studentResponseEntity = restTemplate
                 .exchange("http://localhost:" + port + "/student/" + student.getId(),
                         HttpMethod.PUT,

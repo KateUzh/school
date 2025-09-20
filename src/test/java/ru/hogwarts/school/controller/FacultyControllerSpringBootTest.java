@@ -1,7 +1,6 @@
 package ru.hogwarts.school.controller;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -39,7 +38,6 @@ public class FacultyControllerSpringBootTest {
     }
 
     @Test
-    @DisplayName("C - создание факультета")
     public void createFacultyTest() throws Exception {
         Faculty request = new Faculty("GRF", "red");
 
@@ -55,8 +53,7 @@ public class FacultyControllerSpringBootTest {
     }
 
     @Test
-    @DisplayName("R - получение факультета")
-    public void readFacultyTest() throws Exception{
+    public void readFacultyTest() throws Exception {
         ResponseEntity<Faculty> facultyResponseEntity = restTemplate
                 .getForEntity("http://localhost:" + port + "/faculty/" + faculty.getId(), Faculty.class);
         Faculty responseBody = facultyResponseEntity.getBody();
@@ -69,8 +66,7 @@ public class FacultyControllerSpringBootTest {
     }
 
     @Test
-    @DisplayName("D - удаление факультета")
-    public void deleteFacultyTest() throws Exception{
+    public void deleteFacultyTest() throws Exception {
         ResponseEntity<Faculty> facultyResponseEntity = restTemplate
                 .exchange("http://localhost:" + port + "/faculty/" + faculty.getId(),
                         HttpMethod.DELETE, null, Faculty.class);
@@ -80,10 +76,10 @@ public class FacultyControllerSpringBootTest {
     }
 
     @Test
-    @DisplayName("U - обновление факультета")
-    public void updateFacultyTest() throws Exception{
+    public void updateFacultyTest() throws Exception {
         Faculty updateFacultyRequest = new Faculty("SLZ", faculty.getColor());
         HttpEntity<Faculty> entity = new HttpEntity<>(updateFacultyRequest);
+
         ResponseEntity<Faculty> facultyResponseEntity = restTemplate
                 .exchange("http://localhost:" + port + "/faculty/" + faculty.getId(),
                         HttpMethod.PUT,
