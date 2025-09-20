@@ -44,7 +44,7 @@ public class FacultyController {
 
     @GetMapping
     public ResponseEntity<Collection<Faculty>> getStudentsByNameOrColor(@RequestParam String nameOrColor) {
-            return ResponseEntity.ok(facultyService.findFacultyByNameOrColor(nameOrColor));
+        return ResponseEntity.ok(facultyService.findFacultyByNameOrColor(nameOrColor));
     }
 
     @GetMapping("/{id}/students")
