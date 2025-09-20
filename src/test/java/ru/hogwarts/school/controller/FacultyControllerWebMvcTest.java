@@ -29,7 +29,6 @@ public class FacultyControllerWebMvcTest {
     private FacultyService facultyService;
 
     @Test
-    @DisplayName("C - создание факультета")
     void createFacultyTest() throws Exception {
         Faculty testFaculty = new Faculty("QWE", "purple");
         when(facultyService.addFaculty(any(Faculty.class))).thenReturn(testFaculty);
@@ -42,7 +41,6 @@ public class FacultyControllerWebMvcTest {
     }
 
     @Test
-    @DisplayName("R - получение факультета")
     void getFacultyByNameOrColorTest() throws Exception {
         when(facultyService.findFacultyByNameOrColor("purple")).thenReturn(Arrays.asList(
                 new Faculty("EWQ", "purple"),
@@ -57,7 +55,6 @@ public class FacultyControllerWebMvcTest {
     }
 
     @Test
-    @DisplayName("U - обновление факультета")
     void updateFacultyTest() throws Exception {
         Faculty testFaculty = new Faculty("QWE", "red");
         when(facultyService.editFaculty(any(Long.class), any(Faculty.class))).thenReturn(testFaculty);
@@ -70,7 +67,6 @@ public class FacultyControllerWebMvcTest {
     }
 
     @Test
-    @DisplayName("D - удаление факультета")
     void deleteFacultyTest() throws Exception{
         mockMvc.perform(delete("/faculty/1"))
                 .andExpect(status().isOk());

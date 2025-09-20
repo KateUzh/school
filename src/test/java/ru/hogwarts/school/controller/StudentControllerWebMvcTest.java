@@ -1,6 +1,5 @@
 package ru.hogwarts.school.controller;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -31,7 +30,6 @@ public class StudentControllerWebMvcTest {
     private StudentService studentService;
 
     @Test
-    @DisplayName("C - создание студента")
     void createStudentTest() throws Exception {
         Student testStudent = new Student("Kate", 35);
         when(studentService.addStudent(any(Student.class))).thenReturn(testStudent);
@@ -44,7 +42,6 @@ public class StudentControllerWebMvcTest {
     }
 
     @Test
-    @DisplayName("R - получение студента")
     void getAllStudentByAgeBetweenTest() throws Exception {
         when(studentService.findStudentsByAgeBetween(20, 40)).thenReturn(Arrays.asList(
                 new Student("qwe", 23),
@@ -59,7 +56,6 @@ public class StudentControllerWebMvcTest {
     }
 
     @Test
-    @DisplayName("U - обновление студента")
     void updateStudentTest() throws Exception {
         Student testStudent = new Student("Kate", 35);
         when(studentService.editStudent(any(Long.class), any(Student.class))).thenReturn(testStudent);
@@ -72,7 +68,6 @@ public class StudentControllerWebMvcTest {
     }
 
     @Test
-    @DisplayName("D - удаление студента")
     void deleteStudentTest() throws Exception {
         mockMvc.perform(delete("/student/1"))
                 .andExpect(status().isOk());
