@@ -23,10 +23,7 @@ public class StudentController {
 
     @GetMapping("{id}")
     public ResponseEntity<Student> getStudent(@PathVariable Long id) {
-        Student student = studentService.findStudent(id);
-        if (student == null) {
-            return ResponseEntity.notFound().build();
-        }
+        Student student = studentService.findStudent(id).get();
         return ResponseEntity.ok(student);
     }
 
@@ -56,10 +53,7 @@ public class StudentController {
 
     @GetMapping("/{id}/faculty")
     public ResponseEntity<Faculty> getStudentFaculty(@PathVariable Long id) {
-        Student student = studentService.findStudent(id);
-        if (student == null) {
-            return ResponseEntity.notFound().build();
-        }
+        Student student = studentService.findStudent(id).get();
         return ResponseEntity.ok(student.getFaculty());
     }
 
