@@ -9,7 +9,10 @@ import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.repository.FacultyRepository;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Optional;
+import java.util.stream.LongStream;
+import java.util.stream.Stream;
 
 @Service
 public class FacultyService {
@@ -64,5 +67,24 @@ public class FacultyService {
     public Collection<Faculty> findFacultyByNameOrColor(String nameOrColor) {
         logger.info("Was invoked method for find faculties by name or color");
         return facultyRepository.findByNameIgnoreCaseOrColorIgnoreCase(nameOrColor, nameOrColor);
+    }
+
+    public String findFacultyWithLongestName() {
+        logger.info("Was invoked method for find faculty with longest name");
+        return facultyRepository.findAll().stream()
+                .map(Faculty::getName)
+                .max(Comparator.comparing(String::length))
+                .orElse("Faculty with longest name not found");
+    }
+
+    public static long getNumber() {
+        logger.info("Was invoked method for get number");
+        long startTime = System.currentTimeMillis();
+        long sum = LongStream.rangeClosed(1, 1000000)
+                .parallel()
+                .reduce(0, Long::sum);
+        long methodTime = System.currentTimeMillis() - startTime;
+        logger.info("Method time is {}", methodTime);
+        return sum;
     }
 }
