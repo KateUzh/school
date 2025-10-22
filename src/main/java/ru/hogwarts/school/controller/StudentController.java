@@ -9,6 +9,7 @@ import ru.hogwarts.school.service.StudentService;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -58,17 +59,27 @@ public class StudentController {
     }
 
     @GetMapping("/get-total-number")
-    public Integer getTotalNumberOfStudents(){
+    public Integer getTotalNumberOfStudents() {
         return studentService.getTotalNumberOfStudents();
     }
 
     @GetMapping("/get-average-age")
-    public Integer getAverageAgeOfStudents(){
+    public Integer getAverageAgeOfStudents() {
         return studentService.getAverageAgeOfStudents();
     }
 
     @GetMapping("/get-five-last-students")
-    public Collection<Student> getFiveLastStudents(){
+    public Collection<Student> getFiveLastStudents() {
         return studentService.getFiveLastStudent();
+    }
+
+    @GetMapping("/get-students_whose_name_started_with_A")
+    public List<String> getStudentsWhoseNameStartedWithA() {
+        return studentService.getStudentsWhoseNameStartedWithA();
+    }
+
+    @GetMapping("/get-average-age-with-stream")
+    public Double getAverageAgeOfStudentsWithStream() {
+        return studentService.getAverageAgeOfStudentsWithStream();
     }
 }

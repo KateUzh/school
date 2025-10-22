@@ -49,4 +49,14 @@ public class FacultyController {
         Faculty faculty = facultyService.findFaculty(id).get();
         return ResponseEntity.ok(faculty.getStudents());
     }
+
+    @GetMapping("/get-faculty-with-longest-name")
+    public String getFacultyWithLongestName() {
+        return facultyService.findFacultyWithLongestName();
+    }
+
+    @GetMapping("/get-number")
+    public long getNumber() {
+        return FacultyService.getNumber();
+    }
 }
