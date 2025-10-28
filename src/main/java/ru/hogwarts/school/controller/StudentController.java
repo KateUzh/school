@@ -82,4 +82,25 @@ public class StudentController {
     public Double getAverageAgeOfStudentsWithStream() {
         return studentService.getAverageAgeOfStudentsWithStream();
     }
+
+    @GetMapping("/print-parallel")
+    public void printStudentsNamesParallel() {
+        studentService.printStudentsNamesParallel();
+    }
+
+    @GetMapping("/print-synchronized")
+    public void printStudentsNamesSynchronized() {
+        studentService.printStudentsNamesSynchronized(0);
+        studentService.printStudentsNamesSynchronized(1);
+
+        new Thread(() -> {
+            studentService.printStudentsNamesSynchronized(2);
+            studentService.printStudentsNamesSynchronized(3);
+        }).start();
+
+        new Thread(() -> {
+            studentService.printStudentsNamesSynchronized(4);
+            studentService.printStudentsNamesSynchronized(5);
+        }).start();
+    }
 }

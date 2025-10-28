@@ -2,6 +2,7 @@ package ru.hogwarts.school.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -98,5 +99,26 @@ public class StudentService {
                 .mapToInt(Student::getAge)
                 .average()
                 .orElse(0);
+    }
+
+    public void printStudentsNamesParallel() {
+        List<Student> allStudents = studentRepository.findAll();
+        System.out.println(allStudents.get(0).getName());
+        System.out.println(allStudents.get(1).getName());
+
+        new Thread(() -> {
+            System.out.println(allStudents.get(2).getName());
+            System.out.println(allStudents.get(3).getName());
+        }).start();
+
+        new Thread(() -> {
+            System.out.println(allStudents.get(4).getName());
+            System.out.println(allStudents.get(5).getName());
+        }).start();
+    }
+
+    public synchronized void printStudentsNamesSynchronized(int studentsNumber) {
+        List<Student> allStudents = studentRepository.findAll();
+        System.out.println(allStudents.get(studentsNumber).getName());
     }
 }
