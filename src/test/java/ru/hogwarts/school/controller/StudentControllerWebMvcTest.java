@@ -72,4 +72,16 @@ public class StudentControllerWebMvcTest {
         mockMvc.perform(delete("/student/1"))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    void printStudentsNamesParallelTest() throws Exception {
+        mockMvc.perform(get("/student/print-parallel"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void printStudentsNamesSynchronizedTest() throws Exception {
+        mockMvc.perform(get("/student/print-synchronized"))
+                .andExpect(status().isOk());
+    }
 }
